@@ -44,13 +44,7 @@ pipeline {
           steps {
               sh "docker --version"
               sh "docker build -t ${imageName} ."
-            withCredentials(
-                [usernamePassword(credentialsId: 'samannoi', 
-                passwordVariable: 'Samannoi1728', 
-                usernameVariable: 'samannoi')]) {
-              sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
-              sh "docker push ${imageName}"
-            }
+           
           }
        }
 
