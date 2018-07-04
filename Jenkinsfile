@@ -9,7 +9,6 @@
 // docker run -d -p 9090:80 --name myapp myapp
 
 // ## demo
-echo 'build this application'
 /*
 if docker stop myapp
 then
@@ -32,3 +31,8 @@ fi
 docker build -t myapi .
 docker run -d --name myapi -p 3000:3000 --net=test_default --link mongodb:mongodb myapi
 */
+
+
+node (label: 'slave'){
+    echo 'test from samannoi'
+}
