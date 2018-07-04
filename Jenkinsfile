@@ -33,6 +33,6 @@ docker run -d --name myapi -p 3000:3000 --net=test_default --link mongodb:mongod
 */
 
 
-node (label: 'slave'){
+node (label: 'mgr1'){
     echo 'test from samannoi'
 }
