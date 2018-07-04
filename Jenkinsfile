@@ -31,8 +31,34 @@ fi
 docker build -t myapi .
 docker run -d --name myapi -p 3000:3000 --net=test_default --link mongodb:mongodb myapi
 */
+pipeline {
+    agent none
+    environment {
+        imageName = 'samannoi/my_web_ex'
+        port = 88
+    }
+    
+    stages {
+       stage('Package') { 
+          agent any
+          steps {
+              sh "docker --version"
+              sh "docker build -t ${imageName} ."
+            withCredentials(
+                [usernamePassword(credentialsId: 'docker_hub', 
+                passwordVariable: 'Samannoi1728', 
+                usernameVariable: 'samannoi')]) {
+              sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
+              sh "docker push ${imageName}"
+            }
+          }
+       }
 
-
-node (label: 'mgr1'){
-    echo 'test from samannoi'
+       stage('Deploy') { 
+          agent {label 'mgr1'}
+          steps {
+           sh "echo h"
+          }
+       }
+    }
 }
