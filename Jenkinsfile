@@ -9,6 +9,7 @@
 // docker run -d -p 9090:80 --name myapp myapp
 
 // ## demo
+echo 'build this application'
 /*
 if docker stop myapp
 then
